@@ -1,6 +1,6 @@
 // stores/bookStore.ts
 import { createStore } from "zustand/vanilla";
-import { Book } from "../schemas/Book.ts";
+import { Book } from "../schemas/book.ts";
 
 interface BookState {
   books: Book[];

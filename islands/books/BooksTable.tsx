@@ -4,7 +4,7 @@ import { modalStore, useModal } from "../../stores/modalStore.ts";
 import BookForm from "./BookForm.tsx";
 import { getVisiblePageRange } from "../../helpers/pagination.ts";
 import { bookStore } from "../../stores/bookStore.ts";
-import { Book } from "../../schemas/Book.ts";
+import { Book } from "../../schemas/book.ts";
 import { useBooks } from "../../hooks/useBooks.ts";
 
 /**

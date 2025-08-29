@@ -1,4 +1,4 @@
-import { Book } from "../schemas/Book.ts";
+import { Book } from "../schemas/book.ts";
 
 /**
  * Hook para manejar operaciones relacionadas con libros

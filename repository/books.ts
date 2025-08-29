@@ -1,5 +1,5 @@
 import sql from "../helpers/db.ts";
-import { Book } from "../schemas/Book.ts";
+import { Book } from "../schemas/book.ts";
 
 /**
  * Query para obtener todos los libros

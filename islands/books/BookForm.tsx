@@ -1,4 +1,4 @@
-import { Book, BookSchema } from "../../schemas/Book.ts";
+import { Book, BookSchema } from "../../schemas/book.ts";
 
 /**
  * Componente de formulario para crear o editar un libro
