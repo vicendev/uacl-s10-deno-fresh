@@ -1,7 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
 import { responseJson } from "../../helpers/fetch.ts";
 import { createBook, deleteBook, getBooks, updateBook } from "../../repository/books.ts";
-import { Book } from "../../schemas/Book.ts";
+import { Book } from "../../schemas/book.ts";
 
 /**
  * Manejador para la ruta /api/books
