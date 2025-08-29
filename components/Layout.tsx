@@ -1,7 +1,12 @@
 // components/Layout.tsx
 import { JSX } from "preact/jsx-runtime";
-import { Header } from "./Header.tsx";
+import { Header } from "../islands/Header.tsx";
 
+/**
+ * Componente de Layout que envuelve la aplicación con un encabezado y pie de página
+ * @param props 
+ * @returns 
+ */
 export default function Layout(props: { children: JSX.Element }) {
   return (
     <div class="w-auto">

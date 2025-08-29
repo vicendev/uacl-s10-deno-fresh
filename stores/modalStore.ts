@@ -10,6 +10,9 @@ export type ModalState<T = unknown> = {
   setModalDetails: (restMethod?: string, modalTitle?: string) => void;
 };
 
+/**
+ * Store para manejar el estado del modal
+ */
 export const modalStore = createStore<ModalState<any>>((set) => ({
   open: false,
   data: null,
@@ -20,7 +23,9 @@ export const modalStore = createStore<ModalState<any>>((set) => ({
   setModalDetails: (restMethod: string = "", modalTitle: string = "") => set({ restMethod, modalTitle }),
 }));
 
-// Hook para Preact (suscripción vanilla)
+/**
+ * Hook para usar el estado del modal en componentes Preact
+ */
 import { useEffect, useState } from "preact/hooks";
 export function useModal<T = unknown>() {
   const [state, setState] = useState(modalStore.getState());

@@ -1,12 +1,18 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
-import Modal from "./Modal.tsx";
-import { Book } from "../types/book.ts";
-import { modalStore, useModal } from "../stores/modal.ts";
+import Modal from "../../components/Modal.tsx";
+import { modalStore, useModal } from "../../stores/modalStore.ts";
 import BookForm from "./BookForm.tsx";
-import { getVisiblePageRange } from "../helpers/pagination.ts";
-import { bookStore } from "../stores/books.ts";
+import { getVisiblePageRange } from "../../helpers/pagination.ts";
+import { bookStore } from "../../stores/bookStore.ts";
+import { Book } from "../../schemas/Book.ts";
+import { useBooks } from "../../hooks/useBooks.ts";
 
-export default function Table({ data }: { data: Book[] }) {
+/**
+ * Componente que muestra la tabla de libros con paginación y acciones CRUD
+ * @returns 
+ */
+export default function BooksTable() {
+  const { editBook, saveBook, deleteBook } = useBooks();
   const openEdit = (book: Book) => modalStore.getState().openWith(book);
   const closeModal = () => modalStore.getState().close();
   const _modalDetails = (restMethod: string, modalTitle: string) => modalStore.getState().setModalDetails(restMethod, modalTitle);
@@ -24,8 +30,8 @@ export default function Table({ data }: { data: Book[] }) {
   const [pagination, setPagination] = useState({
     currentPage: 1,
     itemsPerPage: 8,
-    totalItems: data.length,
-    totalPages: Math.ceil(data.length / 8),
+    totalItems: books.length,
+    totalPages: Math.ceil(books.length / 8),
     startIndex: 0,
     endIndex: 8,
   });
@@ -143,20 +149,24 @@ export default function Table({ data }: { data: Book[] }) {
                   <button
                     type="button"
                     class="text-red-600 hover:text-red-800"
-                    onClick={() => {
+                    onClick={async () => {
                       if (!confirm(`¿Está seguro de eliminar el libro "${book.title}"?`)) {
                         return;
                       }
+                      
+                      if (!book.id) {
+                        alert("ID de libro inválido");
+                        return;
+                      }
 
-                      fetch(`/api/books?id=${book.id}`, {
-                        method: "DELETE",
-                      }).then((response) => {
-                        if (!response.ok) {
-                          alert("Error al eliminar el libro");
-                          return;
-                        }
-                        bookStore.getState().reloadBooks();
-                      });
+                      const response = await deleteBook(book.id);
+
+                      if (response.error) {
+                        alert(response.error);
+                        return;
+                      }
+
+                      await bookStore.getState().reloadBooks();
                     }}
                   >
                     Eliminar
@@ -248,16 +258,23 @@ export default function Table({ data }: { data: Book[] }) {
             initial={data}
             onCancel={close}
             onSave={async (updated) => {
-              const response = await fetch("/api/books", {
-                method: restMethod,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updated),
-              });
-              if (!response.ok) {
-                alert("Error al actualizar el libro");
-                return;
+
+              if (restMethod === "POST") {
+                const response = await saveBook(updated);
+
+                if (response.error) {
+                  alert(response.error);
+                  return;
+                }
+              }
+
+              if (restMethod === "PUT") {
+                const response = await editBook(updated);
+
+                if (response.error) {
+                  alert(response.error);
+                  return;
+                }
               }
               
               modalStore.getState().close();

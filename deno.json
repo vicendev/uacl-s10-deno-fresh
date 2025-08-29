@@ -22,6 +22,7 @@
   ],
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "@gz/jwt": "jsr:@gz/jwt@^0.1.0",
     "preact": "https://esm.sh/preact@10.22.0",
     "preact/": "https://esm.sh/preact@10.22.0/",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
@@ -32,11 +33,12 @@
     "$std/": "https://deno.land/std@0.216.0/",
     "zod": "https://esm.sh/zod@3.23.8",
     "zustand": "npm:zustand@^5.0.7",
-    "zustand/vanilla": "https://esm.sh/zustand@4.5.4/vanilla"
+    "zustand/vanilla": "https://esm.sh/zustand@4.5.4/vanilla",
+    "@std/crypto": "jsr:@std/crypto"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "nodeModulesDir": true
+  "nodeModulesDir": "auto"
 }

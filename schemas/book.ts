@@ -1,6 +1,8 @@
 import { z } from "https://esm.sh/zod@3.23.8";
 
-// esquema
+/**
+ * Schema y tipo para los libros
+ */
 export const BookSchema = z.object({
   id: z.coerce.number().int().positive().optional().or(z.nan()),
   title: z.string().min(1, "El título es obligatorio"),
@@ -11,5 +13,7 @@ export const BookSchema = z.object({
   updated_at: z.coerce.date().optional(),
 });
 
-// tipo inferido desde el schema (idéntico a tu interface)
+/**
+ * Tipo para los libros
+ */
 export type Book = z.infer<typeof BookSchema>;

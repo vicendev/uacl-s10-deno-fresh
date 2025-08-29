@@ -1,7 +1,10 @@
 import sql from "../helpers/db.ts";
-import { Book } from "../types/book.ts";
+import { Book } from "../schemas/Book.ts";
 
-
+/**
+ * Query para obtener todos los libros
+ * @returns Book[]
+ */
 export async function getBooks() {
   const response = await sql`
     SELECT id, title, publication_year, stock, price, created_at, updated_at FROM books ORDER BY id ASC
@@ -10,7 +13,17 @@ export async function getBooks() {
   return response;
 }
 
+/**
+ * Query para actualizar un libro
+ * @param book Libro a actualizar
+ * @returns 
+ */
 export async function updateBook(book: Book) {
+
+  if (!book.id) {
+    throw new Error("Book ID is required for update");
+  }
+
   const response = await sql`
     UPDATE books
     SET title = ${book.title}, publication_year = ${book.publication_year}, stock = ${book.stock}, price = ${book.price}
@@ -20,6 +33,11 @@ export async function updateBook(book: Book) {
   return response;
 }
 
+/**
+ * Query para crear un nuevo libro
+ * @param book Libro a crear
+ * @returns 
+ */
 export async function createBook(book: Book) {
   const response = await sql`
     INSERT INTO books (title, publication_year, stock, price)
@@ -30,6 +48,11 @@ export async function createBook(book: Book) {
   return response[0];
 }
 
+/**
+ * Query para eliminar un libro
+ * @param id Id del libro a eliminar
+ * @returns 
+ */
 export async function deleteBook(id: number) {
   const response = await sql`
     DELETE FROM books WHERE id = ${id}

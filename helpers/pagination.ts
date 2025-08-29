@@ -1,3 +1,10 @@
+/**
+ * Función para obtener un rango de páginas visibles para paginación
+ * @param currentPage 
+ * @param totalPages 
+ * @param visiblePages 
+ * @returns 
+ */
 export const getVisiblePageRange = (
   currentPage: number,
   totalPages: number,

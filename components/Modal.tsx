@@ -1,6 +1,6 @@
 // Modal.tsx
 import { ComponentChildren } from "preact";
-import { useModal } from "../stores/modal.ts";
+import { useModal } from "../stores/modalStore.ts";
 
 
 type ModalProps<T = unknown> = {
@@ -8,6 +8,11 @@ type ModalProps<T = unknown> = {
   children?: ComponentChildren | ((ctx: { data: T; close: () => void }) => ComponentChildren);
 };
 
+/**
+ * Componente Modal reutilizable
+ * @param ModalProps<T>
+ * @returns 
+ */
 export default function Modal<T = unknown>({ title, children }: ModalProps<T>) {
   const { open, data, close } = useModal<T>();
 

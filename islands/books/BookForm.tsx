@@ -1,12 +1,19 @@
-import { Book, BookSchema } from "../types/book.ts";
+import { Book, BookSchema } from "../../schemas/Book.ts";
 
+/**
+ * Componente de formulario para crear o editar un libro
+ * @param initial Datos iniciales del libro
+ * @param onSave Función a llamar al guardar el libro
+ * @param onCancel Función a llamar al cancelar la edición/creación
+ * @returns 
+ */
 export default function BookForm({
   initial,
   onSave,
   onCancel,
 }: {
-  initial: Book;                 // ← para editar: pásalo completo
-  onSave: (data: Book) => void;  // Book validado
+  initial: Book;
+  onSave: (data: Book) => void;
   onCancel: () => void;
 }) {
   const submit = (e: Event) => {

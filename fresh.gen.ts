@@ -2,30 +2,46 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $_private_dashboard_index from "./routes/(private)/dashboard/index.tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $_middleware from "./routes/_middleware.ts";
+import * as $api_auth_login from "./routes/api/auth/login.ts";
+import * as $api_auth_logout from "./routes/api/auth/logout.ts";
+import * as $api_auth_register from "./routes/api/auth/register.ts";
 import * as $api_books from "./routes/api/books.ts";
-import * as $dashboard_index from "./routes/dashboard/index.tsx";
-import * as $greet_name_ from "./routes/greet/[name].tsx";
+import * as $auth_login_index from "./routes/auth/login/index.tsx";
+import * as $auth_register_index from "./routes/auth/register/index.tsx";
 import * as $index from "./routes/index.tsx";
-import * as $BookForm from "./islands/BookForm.tsx";
-import * as $Modal from "./islands/Modal.tsx";
-import * as $Table from "./islands/Table.tsx";
+import * as $DashboardContainer from "./islands/DashboardContainer.tsx";
+import * as $Header from "./islands/Header.tsx";
+import * as $auth_AuthForm from "./islands/auth/AuthForm.tsx";
+import * as $auth_RegisterForm from "./islands/auth/RegisterForm.tsx";
+import * as $books_BookForm from "./islands/books/BookForm.tsx";
+import * as $books_BooksTable from "./islands/books/BooksTable.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
+    "./routes/(private)/dashboard/index.tsx": $_private_dashboard_index,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/_middleware.ts": $_middleware,
+    "./routes/api/auth/login.ts": $api_auth_login,
+    "./routes/api/auth/logout.ts": $api_auth_logout,
+    "./routes/api/auth/register.ts": $api_auth_register,
     "./routes/api/books.ts": $api_books,
-    "./routes/dashboard/index.tsx": $dashboard_index,
-    "./routes/greet/[name].tsx": $greet_name_,
+    "./routes/auth/login/index.tsx": $auth_login_index,
+    "./routes/auth/register/index.tsx": $auth_register_index,
     "./routes/index.tsx": $index,
   },
   islands: {
-    "./islands/BookForm.tsx": $BookForm,
-    "./islands/Modal.tsx": $Modal,
-    "./islands/Table.tsx": $Table,
+    "./islands/DashboardContainer.tsx": $DashboardContainer,
+    "./islands/Header.tsx": $Header,
+    "./islands/auth/AuthForm.tsx": $auth_AuthForm,
+    "./islands/auth/RegisterForm.tsx": $auth_RegisterForm,
+    "./islands/books/BookForm.tsx": $books_BookForm,
+    "./islands/books/BooksTable.tsx": $books_BooksTable,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

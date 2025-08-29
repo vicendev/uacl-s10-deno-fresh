@@ -1,6 +1,6 @@
 // stores/bookStore.ts
 import { createStore } from "zustand/vanilla";
-import { Book } from "../types/book.ts";
+import { Book } from "../schemas/Book.ts";
 
 interface BookState {
   books: Book[];
@@ -8,6 +8,9 @@ interface BookState {
   reloadBooks: () => Promise<void>;
 }
 
+/**
+ * Store para manejar el estado de los libros
+ */
 export const bookStore = createStore<BookState>((set) => ({
   books: [],
   setBooks: (books) => set({ books }),
